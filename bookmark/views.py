@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 
 class BookmarkListView(ListView):
     model = Bookmark
+    paginate_by = 5
 
 # CreateView를 상속받아 사용
 class BookmarkCreateView(CreateView):

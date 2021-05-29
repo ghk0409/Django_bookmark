@@ -37,3 +37,42 @@
         </tbody>
     </table>
 {% endblock %}
+
+<!--[pagination] 블록을 적용하기-->
+{% block pagination %}
+    {% if is_paginated %}
+        <ul class="pagination justify-content-center pagination-sm">
+        	<!--출력 페이지보다 이전 목록을 가지고 있을 경우-->
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'list' %}?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a>
+                </li>
+            <!--이전 목록이 없을 경우, Previous 버튼 비활성화-->
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+            {% endif %}
+
+            <!--페이지 수만큼 페이지 버튼 넣기-->
+            {% for object in page_obj.paginator.page_range %}
+                <!--해당 페이지로 이동하면 해당 페이지 버튼은 비활성화-->
+                <li class="page-item {% if page_obj.number == forloop.counter %} disabled{% endif %}">
+                    <a class="page-link" href="{{ request.path }}?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+                </li>
+            {% endfor %}
+
+            <!--출력 페이지보다 다음 목록을 가지고 있을 경우-->
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'list' %}?page={{ page_obj.next_page_number }}">Next</a>
+                </li>
+            <!--다음 목록이 없으면 Next 버튼 비활성화-->
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    {% endif %}
+{% endblock %}
