@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Bookmark(models.Model):
@@ -10,3 +11,9 @@ class Bookmark(models.Model):
     def __str__(self):
         # 객체를 출력할 때 나타날 값
         return "이름 : " + self.site_name + ", 주소 : " + self.url
+
+    def get_absolute_url(self):
+        return reverse('detail', args=[str(self.id)])
+    # get_absolute_url 메서드는 장고에서 사용하는 메서드
+    # 보통 객체의 상세 화면 주소(detail)를 반환하게 만듦
+    # reverse 메서드는 URL 패턴의 이름과 추가 인자를 전달받아 URL을 생성하는 메서드!!

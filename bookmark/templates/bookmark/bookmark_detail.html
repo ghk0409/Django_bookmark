@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}
+    Bookmark Detail
+{% endblock %}
+
+{% block content %}
+    <!--북마크 하나의 정보만 출력-->
+    <!--DetailView가 object라는 이름으로 북마크 값을 전달함-->
+    <!--object변수를 이용해 값을 하나씩 출력-->
+    {{object.site_name}}<br/>
+    {{object.url}}
+{% endblock %}

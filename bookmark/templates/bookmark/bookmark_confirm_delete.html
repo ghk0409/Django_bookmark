@@ -1,0 +1,16 @@
+<!--삭제할 때는 확인이 필요해서 confirm_delete라는 이름을 사용-->
+<!--extends로 base.html 상속받음-->
+{% extends 'base.html' %}
+<!--title 블록 내용 채우기-->
+{% block title %}
+    Confirm Delete
+{% endblock %}
+<!--content 블록 내용 채우기-->
+{% block content %}
+    <!--form 태그와 csrf_token은 혼연일체라고 생각!!-->
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="alert alert-danger">Do you want to delete Bookmark "{{object}}"?</div>
+        <input type="submit" value="Delete" class="btn btn-danger">
+    </form>
+{% endblock %}
